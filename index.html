@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratch and Win Game</title>
+    <style>
+        body {
+            background-color: #212121; /* Background color for the entire page */
+            color: white; /* Default text color */
+            font-family: Arial, sans-serif; /* Choose a gaming-style font */
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #000; /* Background color for the game container (changed to black) */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners for the game container */
+        }
+
+        .game-title {
+            background-image: linear-gradient(45deg, #FF4500, #FF6347, #00FF00, #87CEEB); /* Multi-colored title */
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 36px;
+            text-transform: uppercase; /* Uppercase title text */
+        }
+
+        .password-input {
+            margin-top: 20px;
+            background-color: #000; /* Dark background color for password input line */
+            color: white; /* Text color for password input line */
+            padding: 5px;
+            border-radius: 5px; /* Rounded corners for password input line */
+        }
+
+        .password-input input[type="password"] {
+            background-color: transparent; /* Transparent input field */
+            border: none; /* Remove input field border */
+            color: white; /* Text color for input field */
+            font-size: 18px;
+            width: 100%;
+        }
+
+        .unlock-button {
+            margin-top: 10px;
+            background-color: #FF4500; /* Gaming-style background color for unlock button */
+            color: #000; /* Text color for unlock button */
+            padding: 10px 20px;
+            border: none; /* Remove button border */
+            border-radius: 5px; /* Rounded corners for the button */
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .unlock-button:hover {
+            background-color: #FF6347; /* Change button color on hover */
+        }
+
+        .scratch-card {
+            width: 300px;
+            height: 150px;
+            background-color: #000; /* Dark background color for scratch card */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 10px; /* Rounded corners for the scratch card */
+        }
+
+        .scratch-overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: linear-gradient(45deg, #FF4500, #FF6347, #00FF00, #87CEEB); /* Gaming-style gradient overlay */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scratch-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: white; /* Text color */
+            cursor: pointer;
+        }
+
+        .deposit-withdraw {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .deposit-button, .withdraw-button {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .deposit-button {
+            background-color: #4CAF50; /* Green background for deposit button */
+            color: white; /* Text color for deposit button */
+        }
+
+        .deposit-button:hover {
+            background-color: #45a049; /* Change button color on hover */
+        }
+
+        .withdraw-button {
+            background-color: #f44336; /* Red background for withdraw button */
+            color: white; /* Text color for withdraw button */
+        }
+
+        .withdraw-button:hover {
+            background-color: #d32f2f; /* Change button color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="game-title">Scratch and Win Game</h1>
+        <div class="password-input">
+            <label for="password">Enter Password: </label>
+            <input type="password" id="password" placeholder="Password">
+        </div>
+        <button class="unlock-button" id="unlockButton">Unlock</button>
+        <div class="scratch-card" style="display: none;">
+            <div class="scratch-overlay" id="scratch-area">
+                <p class="scratch-text" id="scratchText">Tap and Win</p>
+            </div>
+        </div>
+        <p id="result"></p>
+        
+        <div class="deposit-withdraw">
+            <h2></h2>
+            <a href="https://wa.me/qr/VIKJFE27ILHUE1" class="deposit-button">Deposit</a>
+            <a href="https://wa.me/qr/VIKJFE27ILHUE1" class="withdraw-button">Withdraw</a>
+        </div>
+    </div>
+
+    <script>
+        const passwordInput = document.getElementById("password");
+        const unlockButton = document.getElementById("unlockButton");
+        const scratchCard = document.querySelector(".scratch-card");
+        const scratchArea = document.getElementById("scratch-area");
+        const scratchText = document.getElementById("scratchText");
+        const resultElement = document.getElementById("result");
+        let gameStarted = false;
+
+        unlockButton.addEventListener("click", function() {
+            const password = passwordInput.value;
+            if (password === "Start" && !gameStarted) {
+                passwordInput.style.display = "none";
+                unlockButton.style.display = "none";
+                scratchCard.style.display = "block";
+                gameStarted = true;
+
+                scratchCard.addEventListener("click", function() {
+                    if (gameStarted) {
+                        const randomAmount = Math.floor(Math.random() * 10) + 1;
+                        scratchArea.style.backgroundImage = "none"; // Remove the background gradient
+                        scratchText.textContent = "Play Again!"; // Change text on click
+                        resultElement.textContent = `Congratulations 🎉 You won: ${randomAmount} Rs`;
+                        gameStarted = false; // Lock the game after the first tap
+                    }
+                });
+            } else if (!gameStarted) {
+                alert("Incorrect password. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>
+
+
