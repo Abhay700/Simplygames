@@ -92,7 +92,6 @@
             font-size: 20px;
             font-weight: bold;
             color: white; /* Text color */
-            cursor: pointer;
         }
 
         .deposit-withdraw {
@@ -109,21 +108,12 @@
             cursor: pointer;
             font-weight: bold;
             font-size: 16px;
-            text-decoration: none;
-        }
-
-        .deposit-button {
-            background-color: #4CAF50; /* Green background for deposit button */
-            color: white; /* Text color for deposit button */
+            text-decoration: none; /* Remove underline from links */
+            color: white; /* Text color for buttons */
         }
 
         .deposit-button:hover {
             background-color: #45a049; /* Change button color on hover */
-        }
-
-        .withdraw-button {
-            background-color: #f44336; /* Red background for withdraw button */
-            color: white; /* Text color for withdraw button */
         }
 
         .withdraw-button:hover {
@@ -141,15 +131,15 @@
         <button class="unlock-button" id="unlockButton">Unlock</button>
         <div class="scratch-card" style="display: none;">
             <div class="scratch-overlay" id="scratch-area">
-                <p class="scratch-text" id="scratchText">Tap and Win</p>
+                <p class="scratch-text" id="scratch-text">Tap and Win</p>
             </div>
         </div>
         <p id="result"></p>
         
         <div class="deposit-withdraw">
-            <h2></h2>
-            <a href="https://wa.me/qr/VIKJFE27ILHUE1" class="deposit-button">Deposit</a>
-            <a href="https://wa.me/qr/VIKJFE27ILHUE1" class="withdraw-button">Withdraw</a>
+            <h2>   </h2>
+            <a href="https://docs.google.com/document/d/1tpiXgmyq9lzB2Z1_xOCTNq50QXlh9d3itR81WOE-cqs/edit?usp=drivesdk" class="deposit-button">Deposit</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSea6DXwvTaIhR1v-zinm37_25US7SXlOtC8-vRTqZSbXqTH8Q/viewform" class="withdraw-button">Withdraw</a>
         </div>
     </div>
 
@@ -158,8 +148,8 @@
         const unlockButton = document.getElementById("unlockButton");
         const scratchCard = document.querySelector(".scratch-card");
         const scratchArea = document.getElementById("scratch-area");
-        const scratchText = document.getElementById("scratchText");
         const resultElement = document.getElementById("result");
+        const scratchText = document.getElementById("scratch-text");
         let gameStarted = false;
 
         unlockButton.addEventListener("click", function() {
@@ -170,12 +160,11 @@
                 scratchCard.style.display = "block";
                 gameStarted = true;
 
-                scratchCard.addEventListener("click", function() {
+                scratchArea.addEventListener("click", function() {
                     if (gameStarted) {
                         const randomAmount = Math.floor(Math.random() * 10) + 1;
                         scratchArea.style.backgroundImage = "none"; // Remove the background gradient
-                        scratchText.textContent = "Play Again!"; // Change text on click
-                        resultElement.textContent = `Congratulations 🎉 You won: ${randomAmount} Rs`;
+                        scratchText.innerHTML = `<strong>Congratulations 🎉</strong><br>You Won<br>${randomAmount} Rs`;
                         gameStarted = false; // Lock the game after the first tap
                     }
                 });
@@ -186,5 +175,3 @@
     </script>
 </body>
 </html>
-
-
