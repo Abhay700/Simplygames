@@ -326,10 +326,8 @@
             // Move enemies
             enemies.forEach(e => { e.y += speed; });
 
-            // Remove off-screen enemies and add score
-            const beforeLen = enemies.length;
+            // Remove off-screen enemies
             enemies = enemies.filter(e => e.y < canvas.height + CAR_HEIGHT);
-            score += (beforeLen - enemies.length);
             score++;
 
             // Increase speed over time
